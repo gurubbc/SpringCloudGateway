@@ -1,0 +1,33 @@
+#Tomcat server port number
+server:
+  port: 4569
+  
+#Registred name
+spring:
+  application:
+    name: springcloudgateway
+  main:
+    web-application-type: reactive
+
+#Configure paths
+
+  cloud:
+    gateway:
+      routes:
+      - id: CUSTOMERSMS
+        uri: lb://CUSTOMERSMS
+        predicates:
+        - Path= /customers/**
+      
+      - id: STOCKSMS
+        uri: lb://STOCKSMS
+        predicates:
+        - Path= /stocks/**      
+    
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:4567/eureka/
+
+      
+ 
